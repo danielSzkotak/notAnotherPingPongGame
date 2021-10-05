@@ -17,7 +17,7 @@ object Form1: TForm1
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
-  object Shape1: TShape
+  object background: TShape
     Left = 0
     Top = 0
     Width = 652
@@ -1143,28 +1143,28 @@ object Form1: TForm1
   end
   object heroTimerLeft: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 30
     OnTimer = heroTimerLeftTimer
     Left = 32
     Top = 464
   end
   object heroTimerRight: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 30
     OnTimer = heroTimerRightTimer
     Left = 96
     Top = 464
   end
   object heroTimerUp: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 30
     OnTimer = heroTimerUpTimer
     Left = 64
     Top = 432
   end
   object heroTimerDown: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 30
     OnTimer = heroTimerDownTimer
     Left = 64
     Top = 464

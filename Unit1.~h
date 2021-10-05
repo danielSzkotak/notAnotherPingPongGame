@@ -13,7 +13,7 @@
 class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
-        TShape *Shape1;
+        TShape *background;
         TImage *hero;
         TTimer *heroTimerLeft;
         TTimer *heroTimerRight;
