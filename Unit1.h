@@ -21,6 +21,8 @@ __published:	// IDE-managed Components
         TTimer *heroTimerDown;
         TImage *badGuy1;
         TTimer *badGuy1Timer;
+        TImage *badGuy2;
+        TTimer *badGuy2Timer;
         void __fastcall heroTimerLeftTimer(TObject *Sender);
         void __fastcall heroTimerRightTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
@@ -30,6 +32,7 @@ __published:	// IDE-managed Components
         void __fastcall heroTimerUpTimer(TObject *Sender);
         void __fastcall heroTimerDownTimer(TObject *Sender);
         void __fastcall badGuy1TimerTimer(TObject *Sender);
+        void __fastcall badGuy2TimerTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);

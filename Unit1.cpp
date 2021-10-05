@@ -11,6 +11,8 @@ TForm1 *Form1;
 
    int verticalRatioOfbudGuyMove =  -8;
    int horizontalRatioOfbudGuyMove =  -8;
+   int verticalRatioOfbadGuy2Move =  -8;
+   int horizontalRatioOfbadGuy2Move =  -8;
 
    bool collision(TImage* hero, TImage* badGuy)
    {
@@ -97,6 +99,38 @@ void __fastcall TForm1::badGuy1TimerTimer(TObject *Sender)
         if (collision(hero, badGuy1)){
              badGuy1Timer->Enabled = false;
              badGuy1->Visible = false;
+
+        }
+
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::badGuy2TimerTimer(TObject *Sender)
+{
+        badGuy2->Left += horizontalRatioOfbadGuy2Move;
+        badGuy2->Top += verticalRatioOfbadGuy2Move;
+
+        //left wall bump
+        if (badGuy2->Left <= background->Left){
+          horizontalRatioOfbadGuy2Move = -horizontalRatioOfbadGuy2Move;
+        }
+        //top wall bump
+        if (badGuy2->Top <= background->Top){
+          verticalRatioOfbadGuy2Move = -verticalRatioOfbadGuy2Move;
+        }
+
+        //right wall bump
+        if (badGuy2->Left+badGuy2->Width >= background->Width){
+          horizontalRatioOfbadGuy2Move = -horizontalRatioOfbadGuy2Move;
+        }
+
+         //bottom wall bump
+        if (badGuy2->Top+badGuy2->Height >= background->Height){
+          verticalRatioOfbadGuy2Move = -verticalRatioOfbadGuy2Move;
+        }
+
+        if (collision(hero, badGuy2)){
+             badGuy2Timer->Enabled = false;
+             badGuy2->Visible = false;
 
         }
 }
