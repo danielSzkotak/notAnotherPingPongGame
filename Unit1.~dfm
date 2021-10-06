@@ -26,8 +26,8 @@ object Form1: TForm1
     Brush.Color = clActiveCaption
   end
   object hero: TImage
-    Left = 352
-    Top = 360
+    Left = 280
+    Top = 392
     Width = 93
     Height = 95
     AutoSize = True
@@ -5204,8 +5204,8 @@ object Form1: TForm1
       0000000000000000000000000000}
   end
   object badGuy2: TImage
-    Left = 304
-    Top = 81
+    Left = 408
+    Top = 369
     Width = 180
     Height = 180
     AutoSize = True
@@ -9263,6 +9263,20 @@ object Form1: TForm1
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000}
+  end
+  object Label1: TLabel
+    Left = 280
+    Top = 8
+    Width = 55
+    Height = 125
+    Caption = '0'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBtnFace
+    Font.Height = -104
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
   end
   object heroTimerLeft: TTimer
     Enabled = False

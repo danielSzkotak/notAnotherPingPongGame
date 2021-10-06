@@ -9,6 +9,9 @@
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 #include <Graphics.hpp>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -23,7 +26,10 @@ __published:	// IDE-managed Components
         TTimer *badGuy1Timer;
         TImage *badGuy2;
         TTimer *badGuy2Timer;
-        TLabel *Label1;
+        TLabel *coinAmountLabel;
+        TImage *coin;
+        TTimer *heroTimer;
+        TTimer *heroLoseTimer;
         void __fastcall heroTimerLeftTimer(TObject *Sender);
         void __fastcall heroTimerRightTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
@@ -34,6 +40,9 @@ __published:	// IDE-managed Components
         void __fastcall heroTimerDownTimer(TObject *Sender);
         void __fastcall badGuy1TimerTimer(TObject *Sender);
         void __fastcall badGuy2TimerTimer(TObject *Sender);
+        void __fastcall heroTimerTimer(TObject *Sender);
+        void __fastcall FormCreate(TObject *Sender);
+        void __fastcall heroLoseTimerTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);

@@ -23,6 +23,7 @@ __published:	// IDE-managed Components
         TTimer *badGuy1Timer;
         TImage *badGuy2;
         TTimer *badGuy2Timer;
+        TLabel *Label1;
         void __fastcall heroTimerLeftTimer(TObject *Sender);
         void __fastcall heroTimerRightTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
