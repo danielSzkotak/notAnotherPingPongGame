@@ -14,8 +14,6 @@ TForm1 *Form1;
    int verticalRatioOfbadGuy2Move =  -8;
    int horizontalRatioOfbadGuy2Move =  -8;
    int coinAmount = 0;
-   //int randomCoinLeftPosition = 0;
-   //int randomCoinTopPosition = 0;
 
    bool collision(TImage* hero, TImage* badGuy)
    {
@@ -175,6 +173,29 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 void __fastcall TForm1::heroLoseTimerTimer(TObject *Sender)
 {
      hero->Top += 15;
+     if (hero->Top >= background->Height){
+        heroLoseTimer->Enabled = false;
+        endGameLabel1->Visible = true;
+        endGameLabel2->Visible = true;
+     }
 }
 //---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::FormKeyPress(TObject *Sender, char &Key)
+{
+     if (Key == VK_RETURN) {
+
+        hero->Left = random(background->Width - hero->Width);
+        hero->Top = random(background->Height - hero->Height);
+        endGameLabel1->Visible = false;
+        endGameLabel2->Visible = false;
+        Form1->OnKeyDown = FormKeyDown;
+        badGuy1Timer->Enabled = true;
+        badGuy2Timer->Enabled = true;
+     }
+}
+//---------------------------------------------------------------------------
+
+
 

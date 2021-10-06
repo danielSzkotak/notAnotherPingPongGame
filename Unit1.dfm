@@ -1,8 +1,8 @@
 object Form1: TForm1
   Left = 2111
   Top = 45
-  Width = 1281
-  Height = 799
+  Width = 1068
+  Height = 728
   Caption = 'Form1'
   Color = clBtnFace
   UseDockManager = True
@@ -15,20 +15,21 @@ object Form1: TForm1
   OldCreateOrder = False
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
   object background: TShape
     Left = 0
     Top = 0
-    Width = 1265
-    Height = 760
+    Width = 1052
+    Height = 689
     Align = alClient
     Brush.Color = clActiveCaption
   end
   object hero: TImage
-    Left = 576
-    Top = 480
+    Left = 664
+    Top = 328
     Width = 93
     Height = 95
     AutoSize = True
@@ -1145,7 +1146,7 @@ object Form1: TForm1
   end
   object badGuy1: TImage
     Left = 264
-    Top = 280
+    Top = 168
     Width = 180
     Height = 180
     AutoSize = True
@@ -9836,6 +9837,36 @@ object Form1: TForm1
       99D1B499D1B499D1B499D1B499D1B499D1B499D1B499D1B499D1B499D1B499D1
       B499D1B499D1B499D1B499D1B499D1B499D1B499D1B499D1B499}
     Transparent = True
+  end
+  object endGameLabel2: TLabel
+    Left = 320
+    Top = 536
+    Width = 420
+    Height = 96
+    Caption = 'to play again'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindow
+    Font.Height = -75
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    Visible = False
+  end
+  object endGameLabel1: TLabel
+    Left = 312
+    Top = 464
+    Width = 432
+    Height = 96
+    Caption = 'Tap ENTER '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindow
+    Font.Height = -75
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    Visible = False
   end
   object heroTimerLeft: TTimer
     Enabled = False

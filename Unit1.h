@@ -30,6 +30,8 @@ __published:	// IDE-managed Components
         TImage *coin;
         TTimer *heroTimer;
         TTimer *heroLoseTimer;
+        TLabel *endGameLabel2;
+        TLabel *endGameLabel1;
         void __fastcall heroTimerLeftTimer(TObject *Sender);
         void __fastcall heroTimerRightTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
@@ -43,6 +45,7 @@ __published:	// IDE-managed Components
         void __fastcall heroTimerTimer(TObject *Sender);
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall heroLoseTimerTimer(TObject *Sender);
+        void __fastcall FormKeyPress(TObject *Sender, char &Key);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);

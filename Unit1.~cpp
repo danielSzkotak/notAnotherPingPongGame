@@ -13,6 +13,9 @@ TForm1 *Form1;
    int horizontalRatioOfbudGuyMove =  -8;
    int verticalRatioOfbadGuy2Move =  -8;
    int horizontalRatioOfbadGuy2Move =  -8;
+   int coinAmount = 0;
+   //int randomCoinLeftPosition = 0;
+   //int randomCoinTopPosition = 0;
 
    bool collision(TImage* hero, TImage* badGuy)
    {
@@ -97,9 +100,11 @@ void __fastcall TForm1::badGuy1TimerTimer(TObject *Sender)
         }
 
         if (collision(hero, badGuy1)){
-             badGuy1Timer->Enabled = false;
-             badGuy1->Visible = false;
-
+            badGuy1Timer->Enabled = false;
+            badGuy2Timer->Enabled = false;
+            Form1->OnKeyDown = NULL;
+            Sleep(733);
+            heroLoseTimer->Enabled = true;
         }
 
 }
@@ -129,9 +134,47 @@ void __fastcall TForm1::badGuy2TimerTimer(TObject *Sender)
         }
 
         if (collision(hero, badGuy2)){
-             badGuy2Timer->Enabled = false;
-             badGuy2->Visible = false;
-
+            badGuy2Timer->Enabled = false;
+            badGuy1Timer->Enabled = false;
+            Form1->OnKeyDown = NULL;
+            Sleep(733);
+            heroLoseTimer->Enabled = true;
         }
 }
 //---------------------------------------------------------------------------
+void __fastcall TForm1::heroTimerTimer(TObject *Sender)
+{
+
+  if (coin->Visible){
+
+      if (collision(hero, coin)){
+             coinAmount++;
+             //heroTimer->Enabled = false;
+             coin->Visible = false;
+             coinAmountLabel->Caption = IntToStr(coinAmount);
+      }
+
+  } else {
+
+       //heroTimer->Enabled = true;
+       coin->Left = random(background->Width - coin->Width);
+       coin->Top = random(background->Height - coin->Height);
+       coin->Visible = true;
+
+  }
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::FormCreate(TObject *Sender)
+{
+        Randomize();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::heroLoseTimerTimer(TObject *Sender)
+{
+     hero->Top += 15;
+}
+//---------------------------------------------------------------------------
+
