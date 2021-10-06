@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 2152
+  Left = 1252
   Top = 125
-  Width = 1154
-  Height = 740
+  Width = 631
+  Height = 627
   Caption = 'Form1'
   Color = clBtnFace
   UseDockManager = True
@@ -20,14 +20,14 @@ object Form1: TForm1
   object background: TShape
     Left = 0
     Top = 0
-    Width = 1138
-    Height = 701
+    Width = 615
+    Height = 588
     Align = alClient
     Brush.Color = clActiveCaption
   end
   object hero: TImage
-    Left = 512
-    Top = 432
+    Left = 352
+    Top = 360
     Width = 93
     Height = 95
     AutoSize = True
@@ -1143,8 +1143,8 @@ object Form1: TForm1
     Transparent = True
   end
   object badGuy1: TImage
-    Left = 144
-    Top = 304
+    Left = 80
+    Top = 368
     Width = 180
     Height = 180
     AutoSize = True
@@ -5204,8 +5204,8 @@ object Form1: TForm1
       0000000000000000000000000000}
   end
   object badGuy2: TImage
-    Left = 808
-    Top = 297
+    Left = 304
+    Top = 81
     Width = 180
     Height = 180
     AutoSize = True
