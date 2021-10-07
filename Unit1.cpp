@@ -9,8 +9,16 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-   int verticalRatioOfbudGuyMove =  0;
-   int horizontalRatioOfbudGuyMove =  0;
+   const int BADGUY1_LEFT_STARTING_POSITION = 80;
+   const int BADGUY1_TOP_STARTING_POSITION = 72;
+   const int BADGUY2_LEFT_STARTING_POSITION = 656;
+   const int BADGUY2_TOP_STARTING_POSITION = 72;
+   const int HERO_LEFT_STARTING_POSITION = 400;
+   const int HERO_TOP_STARTING_POSITION = 490;
+   const int moveRatio = 10;
+
+   int verticalRatioOfbadGuyMove =  0;
+   int horizontalRatioOfbadGuyMove =  0;
    int verticalRatioOfbadGuy2Move =  0;
    int horizontalRatioOfbadGuy2Move =  0;
    int coinAmount = 0;
@@ -23,27 +31,32 @@ TForm1 *Form1;
 
    void setBadGuysRandomStartDirection(){
 
-        int plusOrMinus = random(1);
+        int startingDirections[4];
 
-        if(plusOrMinus == 0) verticalRatioOfbudGuyMove =  -(random(7) + 6);
-        else verticalRatioOfbudGuyMove = random(7) + 6;
+        for (int i=0; i<4; i++){
+           startingDirections[i] = rand() % (2);
+        }
 
-        if(plusOrMinus == 0) horizontalRatioOfbudGuyMove =  -(random(7) + 6);
-        else horizontalRatioOfbudGuyMove =  random(7) + 6;
+        if(startingDirections[0]==0) verticalRatioOfbadGuyMove = -moveRatio;
+        else verticalRatioOfbadGuyMove = moveRatio;
 
-        if(plusOrMinus == 0) verticalRatioOfbadGuy2Move =  -(random(7) + 6);
-        else verticalRatioOfbadGuy2Move = random(7) + 6;
+        if(startingDirections[1]==0) horizontalRatioOfbadGuyMove = -moveRatio;
+        else horizontalRatioOfbadGuyMove = moveRatio;
 
-        if(plusOrMinus == 0) horizontalRatioOfbadGuy2Move =  -(random(7) + 6);
-        else horizontalRatioOfbadGuy2Move = random(7) + 6;
+        if(startingDirections[2]==0) verticalRatioOfbadGuy2Move = -moveRatio;
+        else verticalRatioOfbadGuy2Move = moveRatio;
+
+        if(startingDirections[3]==0) horizontalRatioOfbadGuy2Move = -moveRatio;
+        else horizontalRatioOfbadGuy2Move = moveRatio;
+
    }
 
    bool collision(TImage* hero, TImage* badGuy)
    {
-     if (badGuy->Left >= hero->Left-badGuy->Width &&
-         badGuy->Left <= hero->Left+hero->Width &&
-         badGuy->Top >= hero->Top-badGuy->Height &&
-         badGuy->Top <= hero->Top+hero->Width )
+     if (badGuy->Left-2 >= hero->Left-badGuy->Width &&
+         badGuy->Left+1 <= hero->Left+hero->Width &&
+         badGuy->Top-2 >= hero->Top-badGuy->Height &&
+         badGuy->Top+2 <= hero->Top+hero->Width)
          {
                 return true;
          }
@@ -98,32 +111,33 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 
 void __fastcall TForm1::badGuy1TimerTimer(TObject *Sender)
 {
-        badGuy1->Left += horizontalRatioOfbudGuyMove;
-        badGuy1->Top += verticalRatioOfbudGuyMove;
+        badGuy1->Left += horizontalRatioOfbadGuyMove;
+        badGuy1->Top += verticalRatioOfbadGuyMove;
 
         //left wall bump
         if (badGuy1->Left <= background->Left){
-          horizontalRatioOfbudGuyMove = -horizontalRatioOfbudGuyMove;
+          horizontalRatioOfbadGuyMove = -horizontalRatioOfbadGuyMove;
         }
         //top wall bump
         if (badGuy1->Top <= background->Top){
-          verticalRatioOfbudGuyMove = -verticalRatioOfbudGuyMove;
+          verticalRatioOfbadGuyMove = -verticalRatioOfbadGuyMove;
         }
 
         //right wall bump
         if (badGuy1->Left+badGuy1->Width >= background->Width){
-          horizontalRatioOfbudGuyMove = -horizontalRatioOfbudGuyMove;
+          horizontalRatioOfbadGuyMove = -horizontalRatioOfbadGuyMove;
         }
 
          //bottom wall bump
         if (badGuy1->Top+badGuy1->Height >= background->Height){
-          verticalRatioOfbudGuyMove = -verticalRatioOfbudGuyMove;
+          verticalRatioOfbadGuyMove = -verticalRatioOfbadGuyMove;
         }
 
         if (collision(hero, badGuy1)){
             badGuy1Timer->Enabled = false;
             badGuy2Timer->Enabled = false;
             Form1->OnKeyDown = NULL;
+            sndPlaySound("snd/collision.wav", SND_ASYNC);
             Sleep(733);
             heroLoseTimer->Enabled = true;
         }
@@ -158,6 +172,7 @@ void __fastcall TForm1::badGuy2TimerTimer(TObject *Sender)
             badGuy2Timer->Enabled = false;
             badGuy1Timer->Enabled = false;
             Form1->OnKeyDown = NULL;
+            sndPlaySound("snd/collision.wav", SND_ASYNC);
             Sleep(733);
             heroLoseTimer->Enabled = true;
         }
@@ -169,9 +184,11 @@ void __fastcall TForm1::heroTimerTimer(TObject *Sender)
   if (coin->Visible){
 
       if (collision(hero, coin)){
+
              coinAmount++;
              coin->Visible = false;
              coinAmountLabel->Caption = IntToStr(coinAmount);
+              Beep(500,50);
       }
 
   } else {
@@ -186,6 +203,19 @@ void __fastcall TForm1::heroTimerTimer(TObject *Sender)
 
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
+        ShowMessage("Witaj w grze ThisIsNotAnotherPingPongGame"  sLineBreak
+                     sLineBreak
+                    "Sterowanie:"
+                    sLineBreak
+                    "Strza³ki klawiatury Prawo, Lewo, Góra. Dó³"
+                    sLineBreak sLineBreak
+                    "Twoje zadanie jest proste - zbierz jak najwiêcej monet!"
+                    sLineBreak
+                    "Ale uwa¿aj, to trudniejsze ni¿ myœlisz"
+                    sLineBreak sLineBreak
+                    "Powodzenia! I od³ó¿ nerwy na bok");
+
+
         Randomize();
         badGuy1Timer->Enabled = false;
         badGuy2Timer->Enabled = false;
@@ -216,7 +246,7 @@ void __fastcall TForm1::FormKeyPress(TObject *Sender, char &Key)
         hero->Top = random(background->Height - hero->Height);
         setCoinRandomPosition(background, coin);
         setBadGuysRandomStartDirection();
-        endGameLabel2->Caption = "to Play again";
+        endGameLabel2->Caption = "to play again";
         endGameLabel1->Visible = false;
         endGameLabel2->Visible = false;
         Form1->OnKeyDown = FormKeyDown;
@@ -224,16 +254,18 @@ void __fastcall TForm1::FormKeyPress(TObject *Sender, char &Key)
         badGuy2Timer->Enabled = true;
         coinAmount = 0;
         coinAmountLabel->Caption = "0";
-        badGuy1->Left = 80;
-        badGuy1->Top = 72;
-        badGuy2->Left = 656;
-        badGuy2->Top = 72;
-        hero->Left = 400;
-        hero->Top = 490;
+        badGuy1->Left = BADGUY1_LEFT_STARTING_POSITION;
+        badGuy1->Top = BADGUY1_TOP_STARTING_POSITION;
+        badGuy2->Left = BADGUY2_LEFT_STARTING_POSITION;
+        badGuy2->Top = BADGUY2_TOP_STARTING_POSITION;
+        hero->Left = HERO_LEFT_STARTING_POSITION;
+        hero->Top = HERO_TOP_STARTING_POSITION;
+        sndPlaySound("snd/backSound.wav", SND_ASYNC);
      }
    }
 }
 //---------------------------------------------------------------------------
+
 
 
 

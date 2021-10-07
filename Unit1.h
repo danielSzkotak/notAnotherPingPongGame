@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <mmsystem.hpp>
+#include <jpeg.hpp>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
