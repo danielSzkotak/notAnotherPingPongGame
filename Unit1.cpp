@@ -11,7 +11,7 @@ TForm1 *Form1;
 
    const int BADGUY1_LEFT_STARTING_POSITION = 80;
    const int BADGUY1_TOP_STARTING_POSITION = 72;
-   const int BADGUY2_LEFT_STARTING_POSITION = 656;
+   const int BADGUY2_LEFT_STARTING_POSITION = 712;
    const int BADGUY2_TOP_STARTING_POSITION = 72;
    const int HERO_LEFT_STARTING_POSITION = 400;
    const int HERO_TOP_STARTING_POSITION = 490;
@@ -203,7 +203,7 @@ void __fastcall TForm1::heroTimerTimer(TObject *Sender)
 
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
-        ShowMessage("Witaj w grze ThisIsNotAnotherPingPongGame"  sLineBreak
+        Application->MessageBox("Witaj w grze notAnotherPingPongGame"  sLineBreak
                      sLineBreak
                     "Sterowanie:"
                     sLineBreak
@@ -213,7 +213,7 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
                     sLineBreak
                     "Ale uwa¿aj, to trudniejsze ni¿ myœlisz"
                     sLineBreak sLineBreak
-                    "Powodzenia! I od³ó¿ nerwy na bok");
+                    "Powodzenia! I od³ó¿ nerwy na bok", "notAnotherPingPongGame");
 
 
         Randomize();

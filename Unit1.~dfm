@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 2290
-  Top = 138
+  Left = 2078
+  Top = 114
   BorderStyle = bsDialog
-  Caption = 'Form1'
+  Caption = 'notAnotherPingPongGame'
   ClientHeight = 596
   ClientWidth = 964
   Color = clBtnFace
@@ -522,7 +522,7 @@ object Form1: TForm1
       FFD9}
   end
   object badGuy2: TImage
-    Left = 656
+    Left = 712
     Top = 72
     Width = 138
     Height = 194
