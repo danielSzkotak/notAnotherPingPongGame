@@ -1,9 +1,10 @@
 object Form1: TForm1
-  Left = 2111
-  Top = 45
-  Width = 1068
-  Height = 728
+  Left = 963
+  Top = 140
+  BorderStyle = bsDialog
   Caption = 'Form1'
+  ClientHeight = 597
+  ClientWidth = 925
   Color = clBtnFace
   UseDockManager = True
   DockSite = True
@@ -22,14 +23,14 @@ object Form1: TForm1
   object background: TShape
     Left = 0
     Top = 0
-    Width = 1052
-    Height = 689
+    Width = 925
+    Height = 597
     Align = alClient
     Brush.Color = clActiveCaption
   end
   object hero: TImage
-    Left = 664
-    Top = 328
+    Left = 392
+    Top = 312
     Width = 93
     Height = 95
     AutoSize = True
@@ -1145,8 +1146,8 @@ object Form1: TForm1
     Transparent = True
   end
   object badGuy1: TImage
-    Left = 264
-    Top = 168
+    Left = 80
+    Top = 72
     Width = 180
     Height = 180
     AutoSize = True
@@ -5206,8 +5207,8 @@ object Form1: TForm1
       0000000000000000000000000000}
   end
   object badGuy2: TImage
-    Left = 512
-    Top = 65
+    Left = 656
+    Top = 72
     Width = 180
     Height = 180
     AutoSize = True
@@ -9267,8 +9268,8 @@ object Form1: TForm1
       0000000000000000000000000000}
   end
   object coinAmountLabel: TLabel
-    Left = 352
-    Top = 24
+    Left = 432
+    Top = 16
     Width = 55
     Height = 125
     Caption = '0'
@@ -9281,8 +9282,8 @@ object Form1: TForm1
     Transparent = True
   end
   object coin: TImage
-    Left = 112
-    Top = 168
+    Left = 504
+    Top = 320
     Width = 72
     Height = 81
     AutoSize = True
@@ -9839,11 +9840,13 @@ object Form1: TForm1
     Transparent = True
   end
   object endGameLabel2: TLabel
-    Left = 320
-    Top = 536
-    Width = 420
+    Left = 216
+    Top = 488
+    Width = 473
     Height = 96
-    Caption = 'to play again'
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'to Play'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindow
     Font.Height = -75
@@ -9854,8 +9857,8 @@ object Form1: TForm1
     Visible = False
   end
   object endGameLabel1: TLabel
-    Left = 312
-    Top = 464
+    Left = 248
+    Top = 408
     Width = 432
     Height = 96
     Caption = 'Tap ENTER '
@@ -9897,13 +9900,13 @@ object Form1: TForm1
     Top = 464
   end
   object badGuy1Timer: TTimer
-    Interval = 22
+    Interval = 19
     OnTimer = badGuy1TimerTimer
     Left = 16
     Top = 24
   end
   object badGuy2Timer: TTimer
-    Interval = 17
+    Interval = 19
     OnTimer = badGuy2TimerTimer
     Left = 64
     Top = 24

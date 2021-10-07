@@ -9,11 +9,34 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-   int verticalRatioOfbudGuyMove =  -8;
-   int horizontalRatioOfbudGuyMove =  -8;
-   int verticalRatioOfbadGuy2Move =  -8;
-   int horizontalRatioOfbadGuy2Move =  -8;
+   int verticalRatioOfbudGuyMove =  0;
+   int horizontalRatioOfbudGuyMove =  0;
+   int verticalRatioOfbadGuy2Move =  0;
+   int horizontalRatioOfbadGuy2Move =  0;
    int coinAmount = 0;
+
+   void setCoinRandomPosition(TShape* background, TImage* coin){
+
+       coin->Left = random(background->Width - coin->Width);
+       coin->Top = random(background->Height - coin->Height);
+   }
+
+   void setBadGuysRandomStartDirection(){
+
+        int plusOrMinus = random(1);
+
+        if(plusOrMinus == 0) verticalRatioOfbudGuyMove =  -(random(7) + 6);
+        else verticalRatioOfbudGuyMove = random(7) + 6;
+
+        if(plusOrMinus == 0) horizontalRatioOfbudGuyMove =  -(random(7) + 6);
+        else horizontalRatioOfbudGuyMove =  random(7) + 6;
+
+        if(plusOrMinus == 0) verticalRatioOfbadGuy2Move =  -(random(7) + 6);
+        else verticalRatioOfbadGuy2Move = random(7) + 6;
+
+        if(plusOrMinus == 0) horizontalRatioOfbadGuy2Move =  -(random(7) + 6);
+        else horizontalRatioOfbadGuy2Move = random(7) + 6;
+   }
 
    bool collision(TImage* hero, TImage* badGuy)
    {
@@ -147,16 +170,13 @@ void __fastcall TForm1::heroTimerTimer(TObject *Sender)
 
       if (collision(hero, coin)){
              coinAmount++;
-             //heroTimer->Enabled = false;
              coin->Visible = false;
              coinAmountLabel->Caption = IntToStr(coinAmount);
       }
 
   } else {
 
-       //heroTimer->Enabled = true;
-       coin->Left = random(background->Width - coin->Width);
-       coin->Top = random(background->Height - coin->Height);
+       setCoinRandomPosition(background, coin);
        coin->Visible = true;
 
   }
@@ -167,6 +187,11 @@ void __fastcall TForm1::heroTimerTimer(TObject *Sender)
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
         Randomize();
+        badGuy1Timer->Enabled = false;
+        badGuy2Timer->Enabled = false;
+        endGameLabel1->Visible = true;
+        endGameLabel2->Visible = true;
+        Form1->OnKeyDown = NULL;
 }
 //---------------------------------------------------------------------------
 
@@ -184,16 +209,29 @@ void __fastcall TForm1::heroLoseTimerTimer(TObject *Sender)
 
 void __fastcall TForm1::FormKeyPress(TObject *Sender, char &Key)
 {
+   if(endGameLabel1->Visible){
      if (Key == VK_RETURN) {
 
         hero->Left = random(background->Width - hero->Width);
         hero->Top = random(background->Height - hero->Height);
+        setCoinRandomPosition(background, coin);
+        setBadGuysRandomStartDirection();
+        endGameLabel2->Caption = "to Play again";
         endGameLabel1->Visible = false;
         endGameLabel2->Visible = false;
         Form1->OnKeyDown = FormKeyDown;
         badGuy1Timer->Enabled = true;
         badGuy2Timer->Enabled = true;
+        coinAmount = 0;
+        coinAmountLabel->Caption = "0";
+        badGuy1->Left = 80;
+        badGuy1->Top = 72;
+        badGuy2->Left = 656;
+        badGuy2->Top = 72;
+        hero->Left = 400;
+        hero->Top = 490;
      }
+   }
 }
 //---------------------------------------------------------------------------
 
