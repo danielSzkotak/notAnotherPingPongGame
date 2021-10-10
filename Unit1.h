@@ -14,6 +14,9 @@
 #include <time.h>
 #include <mmsystem.hpp>
 #include <jpeg.hpp>
+#include <memory>
+#include "myRes.rh"
+#include "myRes2.rh"
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -51,6 +54,7 @@ __published:	// IDE-managed Components
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
+         void __fastcall ViewJPEG(TImage *Image, unsigned short ID);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm1 *Form1;

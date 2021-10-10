@@ -23,6 +23,30 @@ TForm1 *Form1;
    int horizontalRatioOfbadGuy2Move =  0;
    int coinAmount = 0;
 
+   void __fastcall TForm1::ViewJPEG(TImage *Image, unsigned short ID)
+{
+ HRSRC rsrc = FindResource(HInstance, MAKEINTRESOURCE(ID), RT_RCDATA);
+ if(!rsrc) return;
+
+ DWORD Size = SizeofResource(HInstance, rsrc);
+ HGLOBAL MemoryHandle = LoadResource(HInstance, rsrc);
+
+ if(MemoryHandle == NULL) return;
+
+ BYTE *MemPtr = (BYTE *)LockResource(MemoryHandle);
+
+ std::auto_ptr<TMemoryStream>stream(new TMemoryStream);
+ stream->Write(MemPtr, Size);
+ stream->Position = 0;
+
+ std::auto_ptr<TJPEGImage> JImage(new TJPEGImage());
+ JImage->LoadFromStream(stream.get());
+
+ Image->Width = JImage->Width;       
+ Image->Height = JImage->Height;     
+ Image->Picture->Assign(JImage.get());
+}
+
    void setCoinRandomPosition(TShape* background, TImage* coin){
 
        coin->Left = random(background->Width - coin->Width);
@@ -137,7 +161,8 @@ void __fastcall TForm1::badGuy1TimerTimer(TObject *Sender)
             badGuy1Timer->Enabled = false;
             badGuy2Timer->Enabled = false;
             Form1->OnKeyDown = NULL;
-            sndPlaySound("snd/collision.wav", SND_ASYNC);
+            //sndPlaySound("snd/collision.wav", SND_ASYNC);
+            PlaySound("ID_SONG2", HInstance, SND_ASYNC | SND_RESOURCE);
             Sleep(733);
             heroLoseTimer->Enabled = true;
         }
@@ -172,7 +197,7 @@ void __fastcall TForm1::badGuy2TimerTimer(TObject *Sender)
             badGuy2Timer->Enabled = false;
             badGuy1Timer->Enabled = false;
             Form1->OnKeyDown = NULL;
-            sndPlaySound("snd/collision.wav", SND_ASYNC);
+            PlaySound("ID_SONG2", HInstance, SND_ASYNC | SND_RESOURCE);
             Sleep(733);
             heroLoseTimer->Enabled = true;
         }
@@ -216,6 +241,9 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
                     "Powodzenia! I od³ó¿ nerwy na bok", "notAnotherPingPongGame");
 
 
+        ViewJPEG(badGuy1, ID_BAD_GUY);
+        ViewJPEG(badGuy2, ID_BAD_GUY);
+        ViewJPEG(coin, ID_COIN);
         Randomize();
         badGuy1Timer->Enabled = false;
         badGuy2Timer->Enabled = false;
@@ -260,7 +288,7 @@ void __fastcall TForm1::FormKeyPress(TObject *Sender, char &Key)
         badGuy2->Top = BADGUY2_TOP_STARTING_POSITION;
         hero->Left = HERO_LEFT_STARTING_POSITION;
         hero->Top = HERO_TOP_STARTING_POSITION;
-        sndPlaySound("snd/backSound.wav", SND_ASYNC);
+        PlaySound("ID_SONG1", HInstance, SND_ASYNC | SND_LOOP |SND_RESOURCE);
      }
    }
 }

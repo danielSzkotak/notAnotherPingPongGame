@@ -1,0 +1,5 @@
+ID_SONG1 WAVE "snd/backSound.wav"
+ID_SONG2 WAVE "snd/collision.wav"
+COIN BITMAP "img/coin.bmp"
+BADGUY BITMAP "img/badGuy.bmp"
+HERO BITMAP "img/hero2.bmp"
