@@ -23,51 +23,31 @@ TForm1 *Form1;
    int horizontalRatioOfbadGuy2Move =  0;
    int coinAmount = 0;
 
-   void __fastcall TForm1::ViewJPEG(TImage *Image, unsigned short ID)
-{
- HRSRC rsrc = FindResource(HInstance, MAKEINTRESOURCE(ID), RT_RCDATA);
- if(!rsrc) return;
-
- DWORD Size = SizeofResource(HInstance, rsrc);
- HGLOBAL MemoryHandle = LoadResource(HInstance, rsrc);
-
- if(MemoryHandle == NULL) return;
-
- BYTE *MemPtr = (BYTE *)LockResource(MemoryHandle);
-
- std::auto_ptr<TMemoryStream>stream(new TMemoryStream);
- stream->Write(MemPtr, Size);
- stream->Position = 0;
-
- std::auto_ptr<TJPEGImage> JImage(new TJPEGImage());
- JImage->LoadFromStream(stream.get());
-
- Image->Width = JImage->Width;       
- Image->Height = JImage->Height;     
- Image->Picture->Assign(JImage.get());
-}
 
    void setCoinRandomPosition(TShape* background, TImage* coin){
 
        coin->Left = random(background->Width - coin->Width);
        coin->Top = random(background->Height - coin->Height);
+
    }
 
    void setBadGuysRandomStartDirection(){
 
+
+         Randomize();
         int startingDirections[4];
 
         for (int i=0; i<4; i++){
            startingDirections[i] = rand() % (2);
         }
 
-        if(startingDirections[0]==0) verticalRatioOfbadGuyMove = -moveRatio;
+        if(startingDirections[0]==1) verticalRatioOfbadGuyMove = -moveRatio;
         else verticalRatioOfbadGuyMove = moveRatio;
 
         if(startingDirections[1]==0) horizontalRatioOfbadGuyMove = -moveRatio;
         else horizontalRatioOfbadGuyMove = moveRatio;
 
-        if(startingDirections[2]==0) verticalRatioOfbadGuy2Move = -moveRatio;
+        if(startingDirections[2]==1) verticalRatioOfbadGuy2Move = -moveRatio;
         else verticalRatioOfbadGuy2Move = moveRatio;
 
         if(startingDirections[3]==0) horizontalRatioOfbadGuy2Move = -moveRatio;
@@ -241,10 +221,13 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
                     "Powodzenia! I od³ó¿ nerwy na bok", "notAnotherPingPongGame");
 
 
-        ViewJPEG(badGuy1, ID_BAD_GUY);
-        ViewJPEG(badGuy2, ID_BAD_GUY);
-        ViewJPEG(coin, ID_COIN);
+
+        coin->Picture->Bitmap->LoadFromResourceName((int)HInstance, "COIN");
+        badGuy1->Picture->Bitmap->LoadFromResourceName((int)HInstance, "BADGUY");
+        badGuy2->Picture->Bitmap->LoadFromResourceName((int)HInstance, "BADGUY");
+        hero->Picture->Bitmap->LoadFromResourceName((int)HInstance, "HERO");
         Randomize();
+        //setBadGuysRandomStartDirection();
         badGuy1Timer->Enabled = false;
         badGuy2Timer->Enabled = false;
         endGameLabel1->Visible = true;
@@ -269,9 +252,9 @@ void __fastcall TForm1::FormKeyPress(TObject *Sender, char &Key)
 {
    if(endGameLabel1->Visible){
      if (Key == VK_RETURN) {
-
-        hero->Left = random(background->Width - hero->Width);
-        hero->Top = random(background->Height - hero->Height);
+         Randomize();
+        //hero->Left = random(background->Width - hero->Width);
+        //hero->Top = random(background->Height - hero->Height);
         setCoinRandomPosition(background, coin);
         setBadGuysRandomStartDirection();
         endGameLabel2->Caption = "to play again";

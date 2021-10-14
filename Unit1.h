@@ -13,10 +13,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <mmsystem.hpp>
-#include <jpeg.hpp>
-#include <memory>
-#include "myRes.rh"
-#include "myRes2.rh"
+
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {

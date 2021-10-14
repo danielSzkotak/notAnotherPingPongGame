@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 499
-  Top = 234
+  Left = 642
+  Top = 209
   BorderStyle = bsDialog
   Caption = 'notAnotherPingPongGame'
   ClientHeight = 596

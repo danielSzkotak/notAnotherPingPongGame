@@ -15,7 +15,7 @@
 #include <mmsystem.hpp>
 #include <jpeg.hpp>
 #include <memory>
-#include "myRes.rh"
+
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {

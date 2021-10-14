@@ -241,9 +241,11 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
                     "Powodzenia! I od³ó¿ nerwy na bok", "notAnotherPingPongGame");
 
 
-        ViewJPEG(badGuy1, ID_BAD_GUY);
-        ViewJPEG(badGuy2, ID_BAD_GUY);
-        ViewJPEG(coin, ID_COIN);
+
+        coin->Picture->Bitmap->LoadFromResourceName((int)HInstance, "COIN");
+        badGuy1->Picture->Bitmap->LoadFromResourceName((int)HInstance, "BADGUY");
+        badGuy2->Picture->Bitmap->LoadFromResourceName((int)HInstance, "BADGUY");
+        hero->Picture->Bitmap->LoadFromResourceName((int)HInstance, "HERO");
         Randomize();
         badGuy1Timer->Enabled = false;
         badGuy2Timer->Enabled = false;
